@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ site.description }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ page.title | default: site.title }}" />
+  <meta property="og:description" content="{{ site.description }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="{{ '/pfp26_closeup.png' | absolute_url }}" />
+
+  <link rel="icon" type="image/png" href="{{ '/pfp26_closeup.png' | relative_url }}" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+</head>
+<body>
+
+  <!-- Top infinite-scroll ribbon banner -->
+  <div class="ribbon ribbon--top" role="presentation" aria-hidden="true">
+    <div class="ribbon__track" data-marquee>
+      <span class="ribbon__item">Kate Prior</span><span class="ribbon__star">✦</span>
+      <span class="ribbon__item">Digital Humanities</span><span class="ribbon__star">✦</span>
+      <span class="ribbon__item">Texts &amp; Technology</span><span class="ribbon__star">✦</span>
+      <span class="ribbon__item">Fan Studies</span><span class="ribbon__star">✦</span>
+      <span class="ribbon__item">Media Scholarship</span><span class="ribbon__star">✦</span>
+      <span class="ribbon__item">Teaching</span><span class="ribbon__star">✦</span>
+    </div>
+  </div>
+
+  <main class="page" data-sections>
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <p>© {{ 'now' | date: "%Y" }} Kate Prior · née Kathryn Loesel</p>
+    <p><a href="mailto:ka118757@ucf.edu">ka118757@ucf.edu</a></p>
+  </footer>
+
+  <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+</body>
+</html>
