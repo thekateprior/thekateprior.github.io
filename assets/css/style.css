@@ -1,0 +1,284 @@
+/* ============================================================
+   Kate Prior — Portfolio
+   Pastel palette drawn from the illustrated avatar:
+   cream paper, blush pink, sage/olive green, soft mauve.
+   ============================================================ */
+
+:root {
+  --cream:       #FBF4EC;
+  --cream-deep:  #F4E9DA;
+  --ink:         #4C403A;
+  --ink-soft:    #6E5F56;
+
+  --blush:       #F3C9C0;
+  --blush-deep:  #E5A9A0;
+  --sage:        #AEBF9E;
+  --sage-deep:   #8AA078;
+  --olive:       #6F7A4E;
+  --lavender:    #CBB8D8;
+  --butter:      #F2DEB0;
+
+  --card:        #FFFFFF;
+  --shadow:      0 10px 30px rgba(111, 90, 76, 0.12);
+  --radius:      22px;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Nunito", system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(243, 201, 192, 0.35), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(174, 191, 158, 0.30), transparent 45%),
+    var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--olive); text-decoration-color: var(--blush-deep); }
+a:hover { color: var(--sage-deep); }
+
+/* ---------- Top ribbon banner (infinite scroll) ---------- */
+.ribbon {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.ribbon--top {
+  background: linear-gradient(90deg, var(--blush) 0%, var(--sage) 50%, var(--lavender) 100%);
+  border-bottom: 3px solid rgba(76, 64, 58, 0.12);
+  padding: 0;
+}
+
+/* Folded-ribbon ends */
+.ribbon--top::before,
+.ribbon--top::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 48px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+.ribbon--top::before { left: 0;  background: linear-gradient(90deg, var(--cream), transparent); }
+.ribbon--top::after  { right: 0; background: linear-gradient(270deg, var(--cream), transparent); }
+
+.ribbon__track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding-block: 0.6rem;
+  will-change: transform;
+  animation: marquee 32s linear infinite;
+}
+
+.ribbon__item {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  color: var(--ink);
+  padding-inline: 1.1rem;
+}
+
+.ribbon__star {
+  color: var(--card);
+  font-size: 0.9rem;
+  text-shadow: 0 1px 1px rgba(76, 64, 58, 0.25);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ---------- Page layout ---------- */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem 2.25rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.hero__avatar {
+  width: 168px;
+  height: 168px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--blush);
+  box-shadow: 0 0 0 6px var(--cream-deep), var(--shadow);
+}
+
+.hero__text { flex: 1 1 280px; }
+
+.hero__eyebrow {
+  margin: 0;
+  font-style: italic;
+  color: var(--sage-deep);
+  letter-spacing: 0.04em;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  line-height: 1.05;
+  margin: 0.1rem 0 0.5rem;
+  color: var(--ink);
+}
+
+.hero__tagline {
+  margin: 0 0 1.1rem;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.hero__links { margin: 0; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  background: var(--sage-deep);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn:hover { background: var(--olive); color: #fff; transform: translateY(-2px); }
+.btn--ghost {
+  background: transparent;
+  color: var(--sage-deep);
+  box-shadow: inset 0 0 0 2px var(--sage);
+}
+.btn--ghost:hover { background: var(--sage); color: var(--ink); }
+
+/* ---------- Sections (built by JS from each H2) ---------- */
+.section {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.section__body { padding: 1.5rem 2.25rem 2rem; }
+
+.section__body h2 {
+  /* The original H2 is hidden visually because the ribbon shows the title,
+     but kept in the DOM for accessibility / anchors. */
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0); overflow: hidden;
+}
+
+.section__body h3 {
+  font-family: var(--font-display);
+  color: var(--olive);
+  font-size: 1.15rem;
+  margin: 1.4rem 0 0.4rem;
+}
+
+.section__body p { margin: 0.5rem 0; }
+
+.section__body ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.6rem 0;
+}
+.section__body li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin: 0.45rem 0;
+}
+.section__body li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--blush-deep);
+}
+
+.section__body a { font-weight: 600; word-break: break-word; }
+
+/* ---------- Per-section ribbon header (infinite scroll) ---------- */
+.section__ribbon {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.5rem 0;
+}
+.section__ribbon .ribbon__track { animation-duration: 26s; }
+
+/* Alternating pastel ribbon backgrounds, cycled by JS via nth-of-type */
+.section:nth-of-type(6n+1) .section__ribbon { background: var(--blush); }
+.section:nth-of-type(6n+2) .section__ribbon { background: var(--sage); }
+.section:nth-of-type(6n+3) .section__ribbon { background: var(--lavender); }
+.section:nth-of-type(6n+4) .section__ribbon { background: var(--butter); }
+.section:nth-of-type(6n+5) .section__ribbon { background: var(--blush-deep); }
+.section:nth-of-type(6n+6) .section__ribbon { background: var(--sage-deep); }
+
+/* Reverse the scroll direction on every other section for variety */
+.section:nth-of-type(even) .section__ribbon .ribbon__track {
+  animation-name: marquee-reverse;
+}
+
+.section__ribbon .ribbon__item {
+  color: var(--ink);
+  font-size: 1.05rem;
+  opacity: 0.92;
+}
+.section__ribbon .ribbon__star { color: rgba(255, 255, 255, 0.85); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1rem 3rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.site-footer p { margin: 0.25rem 0; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 620px) {
+  .hero { padding: 1.5rem; gap: 1.25rem; justify-content: center; text-align: center; }
+  .hero__avatar { width: 130px; height: 130px; }
+  .hero__links { justify-content: center; }
+  .section__body { padding: 1.25rem 1.4rem 1.6rem; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ribbon__track { animation: none !important; transform: none !important; }
+  .ribbon { text-align: center; }
+  .ribbon__track { justify-content: center; flex-wrap: wrap; }
+}

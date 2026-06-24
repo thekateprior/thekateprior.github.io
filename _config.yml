@@ -1,0 +1,19 @@
+title: Kate Prior
+description: >-
+  Portfolio of Kate Prior — doctoral candidate in Texts and Technology
+  (Digital Humanities) at the University of Central Florida. Teaching,
+  research, publications, and fan studies scholarship.
+author: Kate Prior
+email: ka118757@ucf.edu
+
+# Build settings
+markdown: kramdown
+kramdown:
+  parse_block_html: true
+
+# The CV and cover-letter PDFs are kept so they can be downloaded from the site.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
