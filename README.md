@@ -109,7 +109,6 @@ grounds my pedagogy in the scholarship of teaching and learning.
 ## Documents
 
 - 📄 [Curriculum Vitae (PDF)](Prior%202026%20CV.pdf)
-- ✉️ [Cover Letter (PDF)](PriorCL_VC.pdf)
 
 ---
 
