@@ -129,13 +129,16 @@ tbody tr:last-child { border-bottom: none; }
 td strong { font-weight: 700; }
 
 .diss {
-  margin-top: 16px;
   background: var(--peach-soft);
   border-left: 4px solid var(--peach);
   border-radius: 0 14px 14px 0;
   padding: 14px 18px;
   font-style: italic;
 }
+
+/* Tie the dissertation callout to the Ph.D. row directly above it */
+.diss-anchor td { border-bottom: none; padding-bottom: 4px; }
+.diss-row td { border-bottom: none; padding: 0 0 14px; }
 
 /* ---- Lists ---- */
 ul.clean { list-style: none; margin: 0; padding: 0; }
