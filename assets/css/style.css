@@ -22,13 +22,19 @@
   --shadow:      0 10px 30px rgba(111, 90, 76, 0.12);
   --radius:      22px;
 
+  --nav-height:  58px;
+
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body:    "Nunito", system-ui, -apple-system, Segoe UI, sans-serif;
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored sections clear of the sticky nav bar. */
+  scroll-padding-top: calc(var(--nav-height) + 14px);
+}
 
 body {
   margin: 0;
@@ -46,73 +52,73 @@ body {
 a { color: var(--olive); text-decoration-color: var(--blush-deep); }
 a:hover { color: var(--sage-deep); }
 
-/* ---------- Top ribbon banner (infinite scroll) ---------- */
-.ribbon {
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  user-select: none;
-}
-
-.ribbon--top {
-  background: linear-gradient(90deg, var(--blush) 0%, var(--sage) 50%, var(--lavender) 100%);
-  border-bottom: 3px solid rgba(76, 64, 58, 0.12);
-  padding: 0;
-}
-
-/* Folded-ribbon ends */
-.ribbon--top::before,
-.ribbon--top::after {
-  content: "";
-  position: absolute;
+/* ---------- Sticky navigation bar ---------- */
+.navbar {
+  position: sticky;
   top: 0;
-  width: 48px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-.ribbon--top::before { left: 0;  background: linear-gradient(90deg, var(--cream), transparent); }
-.ribbon--top::after  { right: 0; background: linear-gradient(270deg, var(--cream), transparent); }
-
-.ribbon__track {
-  display: inline-flex;
+  z-index: 50;
+  height: var(--nav-height);
+  display: flex;
   align-items: center;
-  gap: 0;
-  padding-block: 0.6rem;
-  will-change: transform;
-  animation: marquee 32s linear infinite;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  background: rgba(251, 244, 236, 0.88);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid rgba(76, 64, 58, 0.10);
+  box-shadow: 0 4px 18px rgba(111, 90, 76, 0.06);
 }
 
-.ribbon__item {
+.navbar__brand {
   font-family: var(--font-display);
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: var(--ink);
-  padding-inline: 1.1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
+.navbar__brand:hover { color: var(--sage-deep); }
 
-.ribbon__star {
-  color: var(--card);
-  font-size: 0.9rem;
-  text-shadow: 0 1px 1px rgba(76, 64, 58, 0.25);
+.navbar__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge  */
 }
+.navbar__links::-webkit-scrollbar { display: none; } /* WebKit */
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.navbar__links a {
+  display: block;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-weight: 700;
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  transition: background 0.18s ease, color 0.18s ease;
 }
-@keyframes marquee-reverse {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+.navbar__links a:hover {
+  color: var(--ink);
+  background: var(--cream-deep);
+}
+.navbar__links a.is-active {
+  color: var(--ink);
+  background: var(--blush);
 }
 
 /* ---------- Page layout ---------- */
 .page {
   max-width: 860px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 3rem;
+  padding: 1.25rem 1.25rem 3rem;
 }
 
 /* ---------- Hero ---------- */
@@ -125,7 +131,7 @@ a:hover { color: var(--sage-deep); }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 2rem 2.25rem;
-  margin: 1.75rem 0 0.5rem;
+  margin: 1.5rem 0 0.5rem;
 }
 
 .hero__avatar {
@@ -187,19 +193,26 @@ a:hover { color: var(--sage-deep); }
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  margin: 1.5rem 0;
+  margin: 1.4rem 0;
   overflow: hidden;
 }
 
-.section__body { padding: 1.5rem 2.25rem 2rem; }
+/* A slim pastel accent bar at the top of each card, cycled by section order. */
+.section__body { padding: 1.6rem 2.25rem 2rem; border-top: 6px solid var(--blush); }
+.section:nth-of-type(6n+1) .section__body { border-top-color: var(--blush); }
+.section:nth-of-type(6n+2) .section__body { border-top-color: var(--sage); }
+.section:nth-of-type(6n+3) .section__body { border-top-color: var(--lavender); }
+.section:nth-of-type(6n+4) .section__body { border-top-color: var(--butter); }
+.section:nth-of-type(6n+5) .section__body { border-top-color: var(--blush-deep); }
+.section:nth-of-type(6n+6) .section__body { border-top-color: var(--sage-deep); }
 
-.section__body h2 {
-  /* The original H2 is hidden visually because the ribbon shows the title,
-     but kept in the DOM for accessibility / anchors. */
-  position: absolute;
-  width: 1px; height: 1px;
-  margin: -1px; padding: 0; border: 0;
-  clip: rect(0 0 0 0); overflow: hidden;
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0.2rem 0 1rem;
 }
 
 .section__body h3 {
@@ -230,34 +243,6 @@ a:hover { color: var(--sage-deep); }
 
 .section__body a { font-weight: 600; word-break: break-word; }
 
-/* ---------- Per-section ribbon header (infinite scroll) ---------- */
-.section__ribbon {
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 0.5rem 0;
-}
-.section__ribbon .ribbon__track { animation-duration: 26s; }
-
-/* Alternating pastel ribbon backgrounds, cycled by JS via nth-of-type */
-.section:nth-of-type(6n+1) .section__ribbon { background: var(--blush); }
-.section:nth-of-type(6n+2) .section__ribbon { background: var(--sage); }
-.section:nth-of-type(6n+3) .section__ribbon { background: var(--lavender); }
-.section:nth-of-type(6n+4) .section__ribbon { background: var(--butter); }
-.section:nth-of-type(6n+5) .section__ribbon { background: var(--blush-deep); }
-.section:nth-of-type(6n+6) .section__ribbon { background: var(--sage-deep); }
-
-/* Reverse the scroll direction on every other section for variety */
-.section:nth-of-type(even) .section__ribbon .ribbon__track {
-  animation-name: marquee-reverse;
-}
-
-.section__ribbon .ribbon__item {
-  color: var(--ink);
-  font-size: 1.05rem;
-  opacity: 0.92;
-}
-.section__ribbon .ribbon__star { color: rgba(255, 255, 255, 0.85); }
-
 /* ---------- Footer ---------- */
 .site-footer {
   text-align: center;
@@ -269,16 +254,16 @@ a:hover { color: var(--sage-deep); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 620px) {
+  .navbar { gap: 0.6rem; padding: 0 0.85rem; }
+  .navbar__brand { font-size: 1.02rem; }
   .hero { padding: 1.5rem; gap: 1.25rem; justify-content: center; text-align: center; }
   .hero__avatar { width: 130px; height: 130px; }
   .hero__links { justify-content: center; }
-  .section__body { padding: 1.25rem 1.4rem 1.6rem; }
+  .section__body { padding: 1.35rem 1.4rem 1.6rem; }
+  .section__title { font-size: 1.5rem; }
 }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .ribbon__track { animation: none !important; transform: none !important; }
-  .ribbon { text-align: center; }
-  .ribbon__track { justify-content: center; flex-wrap: wrap; }
 }
