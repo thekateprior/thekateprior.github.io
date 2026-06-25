@@ -65,9 +65,9 @@ h1 {
   margin: 0 0 4px;
   letter-spacing: .5px;
 }
-.nee { color: var(--ink-soft); font-style: italic; font-size: 1.05rem; }
+.nee { color: var(--ink-soft); font-style: italic; font-size: 1.05rem; margin: 0 0 14px; }
 .tagline {
-  margin: 12px 0 16px;
+  margin: 0 0 8px;
   max-width: 540px;
   font-size: 1.12rem;
   color: var(--ink-soft);
@@ -218,7 +218,7 @@ footer {
     gap: 18px;
     padding: 32px 22px 20px;
   }
-  .hero-info .tagline { margin: 12px auto 16px; }
+  .hero-info .tagline { margin: 0 auto 8px; }
   .hero-info .contact { justify-content: center; }
   section.card { padding: 26px 22px; border-radius: 20px; }
   thead { display: none; }
