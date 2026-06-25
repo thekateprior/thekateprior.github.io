@@ -108,7 +108,7 @@ header.hero {
   align-items: center;
   gap: 34px;
   text-align: left;
-  padding: 36px 38px 28px;
+  padding: 36px 0 28px;
 }
 .avatar {
   width: 150px; height: 150px;
