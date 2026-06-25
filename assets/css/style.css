@@ -42,33 +42,38 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---- Hero ---- */
 header.hero {
-  text-align: center;
-  padding: 64px 24px 40px;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  text-align: left;
+  padding: 36px 38px 28px;
 }
 .avatar {
-  width: 168px; height: 168px;
+  width: 150px; height: 150px;
   border-radius: 50%;
   object-fit: cover;
   border: 6px solid #fff;
   box-shadow: 0 12px 32px rgba(122, 99, 80, .22);
   background: var(--sage);
+  flex: none;
 }
+.hero-info { flex: 1 1 auto; min-width: 0; }
 h1 {
   font-family: 'Fraunces', serif;
   font-weight: 600;
   font-size: clamp(2.2rem, 6vw, 3.2rem);
-  margin: 22px 0 4px;
+  margin: 0 0 4px;
   letter-spacing: .5px;
 }
 .nee { color: var(--ink-soft); font-style: italic; font-size: 1.05rem; }
 .tagline {
-  margin: 14px auto 18px;
+  margin: 12px 0 16px;
   max-width: 540px;
   font-size: 1.12rem;
   color: var(--ink-soft);
 }
 .contact {
-  display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start;
 }
 .chip {
   background: #fff;
@@ -207,6 +212,14 @@ footer {
 }
 
 @media (max-width: 560px) {
+  header.hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+    padding: 32px 22px 20px;
+  }
+  .hero-info .tagline { margin: 12px auto 16px; }
+  .hero-info .contact { justify-content: center; }
   section.card { padding: 26px 22px; border-radius: 20px; }
   thead { display: none; }
   table, tbody, tr, td { display: block; width: 100%; }
